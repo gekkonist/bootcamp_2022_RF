@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220610 21:32:38.744" rpa="false" schemaversion="3">
+<suite id="s1" name="Task1" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_1/task1">
+<suite id="s1-s1" name="Autotest" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_1/task1/autotest.robot">
+<test id="s1-s1-t1" name="Part 1" line="10">
+<kw name="Getting the min/max values">
+<arg>${Numbers}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${min}</var>
+<arg>min($numbers)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:32:38.777" level="INFO">${min} = -1</msg>
+<status status="PASS" starttime="20220610 21:32:38.774" endtime="20220610 21:32:38.777"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${max}</var>
+<arg>max($numbers)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:32:38.777" level="INFO">${max} = 10</msg>
+<status status="PASS" starttime="20220610 21:32:38.777" endtime="20220610 21:32:38.777"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Minimum value - ${min}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220610 21:32:38.777" level="INFO">Minimum value - -1</msg>
+<status status="PASS" starttime="20220610 21:32:38.777" endtime="20220610 21:32:38.777"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Maximum value - ${max}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220610 21:32:38.777" level="INFO">Maximum value - 10</msg>
+<status status="PASS" starttime="20220610 21:32:38.777" endtime="20220610 21:32:38.777"/>
+</kw>
+<status status="PASS" starttime="20220610 21:32:38.774" endtime="20220610 21:32:38.778"/>
+</kw>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>Part 1 is correct</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220610 21:32:38.778" level="INFO">Set test message to:
+Part 1 is correct</msg>
+<status status="PASS" starttime="20220610 21:32:38.778" endtime="20220610 21:32:38.778"/>
+</kw>
+<status status="PASS" starttime="20220610 21:32:38.774" endtime="20220610 21:32:38.778">Part 1 is correct</status>
+</test>
+<test id="s1-s1-t2" name="Part 2" line="14">
+<kw name="Create List" library="BuiltIn">
+<var>${numbers unique}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220610 21:32:38.779" level="INFO">${numbers unique} = []</msg>
+<status status="PASS" starttime="20220610 21:32:38.778" endtime="20220610 21:32:38.779"/>
+</kw>
+<kw name="Remove Duplicates" library="Collections">
+<var>${numbers unique}</var>
+<arg>${Numbers}</arg>
+<doc>Returns a list without duplicates based on the given ``list``.</doc>
+<msg timestamp="20220610 21:32:38.779" level="INFO">1 duplicate removed.</msg>
+<msg timestamp="20220610 21:32:38.779" level="INFO">${numbers unique} = [1, 2, 3, 5, 0, -1, 10]</msg>
+<status status="PASS" starttime="20220610 21:32:38.779" endtime="20220610 21:32:38.779"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Unique list - ${numbers unique}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220610 21:32:38.779" level="INFO">Unique list - [1, 2, 3, 5, 0, -1, 10]</msg>
+<status status="PASS" starttime="20220610 21:32:38.779" endtime="20220610 21:32:38.779"/>
+</kw>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>Part 2 is correct</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220610 21:32:38.779" level="INFO">Set test message to:
+Part 2 is correct</msg>
+<status status="PASS" starttime="20220610 21:32:38.779" endtime="20220610 21:32:38.779"/>
+</kw>
+<status status="PASS" starttime="20220610 21:32:38.778" endtime="20220610 21:32:38.780">Part 2 is correct</status>
+</test>
+<test id="s1-s1-t3" name="Part 3" line="21">
+<kw name="Getting the sum value">
+<arg>${Numbers}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${sum}</var>
+<arg>sum($numbers)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:32:38.780" level="INFO">${sum} = 21</msg>
+<status status="PASS" starttime="20220610 21:32:38.780" endtime="20220610 21:32:38.781"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Sum - ${sum}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220610 21:32:38.781" level="INFO">Sum - 21</msg>
+<status status="PASS" starttime="20220610 21:32:38.781" endtime="20220610 21:32:38.781"/>
+</kw>
+<status status="PASS" starttime="20220610 21:32:38.780" endtime="20220610 21:32:38.781"/>
+</kw>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>Part 3 is correct</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220610 21:32:38.781" level="INFO">Set test message to:
+Part 3 is correct</msg>
+<status status="PASS" starttime="20220610 21:32:38.781" endtime="20220610 21:32:38.781"/>
+</kw>
+<status status="PASS" starttime="20220610 21:32:38.780" endtime="20220610 21:32:38.781">Part 3 is correct</status>
+</test>
+<doc>Test-case for list with numbers (Homework 1.1)</doc>
+<status status="PASS" starttime="20220610 21:32:38.766" endtime="20220610 21:32:38.782"/>
+</suite>
+<status status="PASS" starttime="20220610 21:32:38.746" endtime="20220610 21:32:38.782"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Task1">Task1</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s1" name="Autotest">Task1.Autotest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

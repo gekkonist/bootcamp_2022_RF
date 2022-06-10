@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220610 21:35:52.476" rpa="false" schemaversion="3">
+<suite id="s1" name="Task2" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_1/task2">
+<suite id="s1-s1" name="F2C" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_1/task2/F2C.robot">
+<test id="s1-s1-t1" name="Celsios to Fahrenheit" line="6">
+<kw name="Create List" library="BuiltIn">
+<var>${celsios}</var>
+<arg>${0}</arg>
+<arg>${350}</arg>
+<arg>${-32}</arg>
+<arg>${100}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220610 21:35:52.495" level="INFO">${celsios} = [0, 350, -32, 100]</msg>
+<status status="PASS" starttime="20220610 21:35:52.494" endtime="20220610 21:35:52.495"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${fahrenheit}</var>
+<arg>${32}</arg>
+<arg>${662}</arg>
+<arg>${-25.6}</arg>
+<arg>${212}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220610 21:35:52.496" level="INFO">${fahrenheit} = [32, 662, -25.6, 212]</msg>
+<status status="PASS" starttime="20220610 21:35:52.495" endtime="20220610 21:35:52.496"/>
+</kw>
+<kw name="Check the formula">
+<var>${answer}</var>
+<arg>${celsios}</arg>
+<kw name="Create List" library="BuiltIn">
+<var>${answer}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220610 21:35:52.497" level="INFO">${answer} = []</msg>
+<status status="PASS" starttime="20220610 21:35:52.496" endtime="20220610 21:35:52.497"/>
+</kw>
+<for flavor="IN">
+<var>${number}</var>
+<value>@{numbers}</value>
+<iter>
+<var name="${number}">0</var>
+<kw name="Evaluate" library="BuiltIn">
+<var>${gap}</var>
+<arg>9/5 * ${number} + 32</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:35:52.497" level="INFO">${gap} = 32.0</msg>
+<status status="PASS" starttime="20220610 21:35:52.497" endtime="20220610 21:35:52.497"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${answer}</arg>
+<arg>${gap}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220610 21:35:52.497" endtime="20220610 21:35:52.497"/>
+</kw>
+<status status="PASS" starttime="20220610 21:35:52.497" endtime="20220610 21:35:52.497"/>
+</iter>
+<iter>
+<var name="${number}">350</var>
+<kw name="Evaluate" library="BuiltIn">
+<var>${gap}</var>
+<arg>9/5 * ${number} + 32</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:35:52.498" level="INFO">${gap} = 662.0</msg>
+<status status="PASS" starttime="20220610 21:35:52.497" endtime="20220610 21:35:52.498"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${answer}</arg>
+<arg>${gap}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220610 21:35:52.498" endtime="20220610 21:35:52.498"/>
+</kw>
+<status status="PASS" starttime="20220610 21:35:52.497" endtime="20220610 21:35:52.498"/>
+</iter>
+<iter>
+<var name="${number}">-32</var>
+<kw name="Evaluate" library="BuiltIn">
+<var>${gap}</var>
+<arg>9/5 * ${number} + 32</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:35:52.498" level="INFO">${gap} = -25.6</msg>
+<status status="PASS" starttime="20220610 21:35:52.498" endtime="20220610 21:35:52.498"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${answer}</arg>
+<arg>${gap}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220610 21:35:52.498" endtime="20220610 21:35:52.498"/>
+</kw>
+<status status="PASS" starttime="20220610 21:35:52.498" endtime="20220610 21:35:52.498"/>
+</iter>
+<iter>
+<var name="${number}">100</var>
+<kw name="Evaluate" library="BuiltIn">
+<var>${gap}</var>
+<arg>9/5 * ${number} + 32</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220610 21:35:52.499" level="INFO">${gap} = 212.0</msg>
+<status status="PASS" starttime="20220610 21:35:52.498" endtime="20220610 21:35:52.499"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${answer}</arg>
+<arg>${gap}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220610 21:35:52.499" endtime="20220610 21:35:52.499"/>
+</kw>
+<status status="PASS" starttime="20220610 21:35:52.498" endtime="20220610 21:35:52.499"/>
+</iter>
+<status status="PASS" starttime="20220610 21:35:52.497" endtime="20220610 21:35:52.499"/>
+</for>
+<msg timestamp="20220610 21:35:52.499" level="INFO">${answer} = [32.0, 662.0, -25.6, 212.0]</msg>
+<status status="PASS" starttime="20220610 21:35:52.496" endtime="20220610 21:35:52.499"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${answer}</arg>
+<arg>${fahrenheit}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220610 21:35:52.499" endtime="20220610 21:35:52.499"/>
+</kw>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>Formula is correct</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220610 21:35:52.500" level="INFO">Set test message to:
+Formula is correct</msg>
+<status status="PASS" starttime="20220610 21:35:52.499" endtime="20220610 21:35:52.500"/>
+</kw>
+<status status="PASS" starttime="20220610 21:35:52.493" endtime="20220610 21:35:52.500">Formula is correct</status>
+</test>
+<doc>Test-case for checking formula (Homework 1.2)</doc>
+<status status="PASS" starttime="20220610 21:35:52.488" endtime="20220610 21:35:52.500"/>
+</suite>
+<status status="PASS" starttime="20220610 21:35:52.476" endtime="20220610 21:35:52.501"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Task2">Task2</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="F2C">Task2.F2C</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
