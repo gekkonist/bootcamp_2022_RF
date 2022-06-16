@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220616 22:55:15.009" rpa="false" schemaversion="3">
+<suite id="s1" name="Task Lesson" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_2/task_lesson">
+<suite id="s1-s1" name="Autotesk" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_2/task_lesson/autotesk.robot">
+<test id="s1-s1-t1" name="Check Search One Table #1" line="9">
+<kw name="Test Setup" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220616 22:55:15.076" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220616 22:55:15.076" endtime="20220616 22:55:15.076"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220616 22:55:15.076" endtime="20220616 22:55:15.081"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.076" endtime="20220616 22:55:15.081"/>
+</kw>
+<kw name="Get And Check Response">
+<arg>customers</arg>
+<arg>age=lt.21&amp;state=eq.SD</arg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220616 22:55:15.094" level="INFO">GET Request : url=http://localhost:3000/customers?age=lt.21&amp;state=eq.SD 
+ path_url=/customers?age=lt.21&amp;state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220616 22:55:15.094" level="INFO">GET Response : url=http://localhost:3000/customers?age=lt.21&amp;state=eq.SD 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Thu, 16 Jun 2022 19:55:15 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-11/*', 'Content-Location': '/customers?age=lt.21&amp;state=eq.SD', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"customerid":430,"firstname":"SADBYE","lastname":"LQFAMCRRWU","address1":"2815718090 Dell Way","address2":"\\N","city":"MCKVQYH","state":"SD","zip":14548,"country":"US","region":1,"email":"LQFAMCRRWU@dell.com","phone":"2815718090","creditcardtype":4,"creditcard":"7.00995E+15","creditcardexpiration":"2009/12","username":"user430","password":"password","age":19,"income":20000,"gender":"M"}, 
+ {"customerid":1620,"firstname":"MWBVRV","lastname":"JSPQUHRHNQ","address1":"5927176243 Dell Way","address2":"\\N","city":"YRIMDVC","state":"SD","zip":92018,"country":"US","region":1,"email":"JSPQUHRHNQ@dell.com","phone":"5927176243","creditcardtype":3,"creditcard":"8.86601E+15","creditcardexpiration":"2009/10","username":"user1620","password":"password","age":20,"income":80000,"gender":"M"}, 
+ {"customerid":1902,"firstname":"CXUBFK","lastname":"APXYQPXOPS","address1":"9932233930 Dell Way","address2":"\\N","city":"IWHUFST","state":"SD","zip":46577,"country":"US","region":1,"email":"APXYQPXOPS@dell.com","phone":"9932233930","creditcardtype":4,"creditcard":"3.59669E+15","creditcardexpiration":"2009/06","username":"user1902","password":"password","age":20,"income":60000,"gender":"F"}, 
+ {"customerid":2388,"firstname":"YLHKWR","lastname":"ZWVATZIHSZ","address1":"9018806393 Dell Way","address2":"\\N","city":"NFGANML","state":"SD","zip":27968,"country":"US","region":1,"email":"ZWVATZIHSZ@dell.com","phone":"9018806393","creditcardtype":5,"creditcard":"7.36411E+15","creditcardexpiration":"2009/05","username":"user2388","password":"password","age":18,"income":40000,"gender":"M"}, 
+ {"customerid":4092,"firstname":"NWGZHZ","lastname":"SXKCUISAYM","address1":"2454639426 Dell Way","address2":"\\N","city":"VVRAJTG","state":"SD","zip":94876,"country":"US","region":1,"email":"SXKCUISAYM@dell.com","phone":"2454639426","creditcardtype":1,"creditcard":"2.54479E+15","creditcardexpiration":"2009/06","username":"user4092","password":"password","age":20,"income":80000,"gender":"F"}, 
+ {"customerid":5456,"firstname":"QYLUXC","lastname":"KZJQHEYBZN","address1":"7869868251 Dell Way","address2":"\\N","city":"AQBGHYF","state":"SD","zip":57173,"country":"US","region":1,"email":"KZJQHEYBZN@dell.com","phone":"7869868251","creditcardtype":1,"creditcard":"6.62925E+15","creditcardexpiration":"2011/01","username":"user5456","password":"password","age":20,"income":40000,"gender":"F"}, 
+ {"customerid":5490,"firstname":"YSLZYD","lastname":"EWSAPICKKO","address1":"2610554455 Dell Way","address2":"\\N","city":"CYOLTSZ","state":"SD","zip":46821,"country":"US","region":1,"email":"EWSAPICKKO@dell.com","phone":"2610554455","creditcardtype":1,"creditcard":"9.77978E+15","creditcardexpiration":"2010/09","username":"user5490","password":"password","age":19,"income":60000,"gender":"F"}, 
+ {"customerid":6443,"firstname":"WJMFYA","lastname":"PECYSELKTZ","address1":"3711128852 Dell Way","address2":"\\N","city":"ZHJGKJQ","state":"SD","zip":94247,"country":"US","region":1,"email":"PECYSELKTZ@dell.com","phone":"3711128852","creditcardtype":5,"creditcard":"4.02913E+15","creditcardexpiration":"2012/10","username":"user6443","password":"password","age":19,"income":100000,"gender":"F"}, 
+ {"customerid":7340,"firstname":"OQMUAV","lastname":"VHKACPCMGV","address1":"1166718371 Dell Way","address2":"\\N","city":"UTKEZEW","state":"SD","zip":88021,"country":"US","region":1,"email":"VHKACPCMGV@dell.com","phone":"1166718371","creditcardtype":1,"creditcard":"8.81066E+15","creditcardexpiration":"2009/12","username":"user7340","password":"password","age":19,"income":100000,"gender":"M"}, 
+ {"customerid":8507,"firstname":"PUMLTB","lastname":"UISNUVEPAT","address1":"8134042856 Dell Way","address2":"\\N","city":"WJDLUCQ","state":"SD","zip":33323,"country":"US","region":1,"email":"UISNUVEPAT@dell.com","phone":"8134042856","creditcardtype":2,"creditcard":"9.82469E+15","creditcardexpiration":"2008/01","username":"user8507","password":"password","age":19,"income":80000,"gender":"M"}, 
+ {"customerid":8759,"firstname":"AUZITM","lastname":"BPHXCGRCAL","address1":"8515647409 Dell Way","address2":"\\N","city":"OVMFHJL","state":"SD","zip":61018,"country":"US","region":1,"email":"BPHXCGRCAL@dell.com","phone":"8515647409","creditcardtype":5,"creditcard":"2.00792E+15","creditcardexpiration":"2011/04","username":"user8759","password":"password","age":20,"income":80000,"gender":"F"}, 
+ {"customerid":9527,"firstname":"XTUEKT","lastname":"EAPTUWLGIM","address1":"9690323248 Dell Way","address2":"\\N","city":"TTYADUC","state":"SD","zip":51169,"country":"US","region":1,"email":"EAPTUWLGIM@dell.com","phone":"9690323248","creditcardtype":4,"creditcard":"8.30594E+15","creditcardexpiration":"2011/05","username":"user9527","password":"password","age":20,"income":80000,"gender":"F"}] 
+ </msg>
+<msg timestamp="20220616 22:55:15.094" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220616 22:55:15.082" endtime="20220616 22:55:15.094"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${response_number}</var>
+<arg>${response}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220616 22:55:15.094" level="INFO">${response_number} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220616 22:55:15.094" endtime="20220616 22:55:15.094"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${response_number}[11:14] != 200</arg>
+<arg>Error Message</arg>
+<arg>${response_number}</arg>
+<arg>${response}</arg>
+<arg>ELSE</arg>
+<arg>BuiltIn.Set Test Message</arg>
+<arg>That's right</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>That's right</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220616 22:55:15.095" level="INFO">Set test message to:
+That's right</msg>
+<status status="PASS" starttime="20220616 22:55:15.095" endtime="20220616 22:55:15.095"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.095" endtime="20220616 22:55:15.095"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.081" endtime="20220616 22:55:15.095"/>
+</kw>
+<kw name="Test Teardown" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220616 22:55:15.096" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220616 22:55:15.096" endtime="20220616 22:55:15.096"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220616 22:55:15.096" endtime="20220616 22:55:15.096"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.095" endtime="20220616 22:55:15.096"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.075" endtime="20220616 22:55:15.096">That's right</status>
+</test>
+<test id="s1-s1-t2" name="Check Search One Table #2" line="10">
+<kw name="Test Setup" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220616 22:55:15.097" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220616 22:55:15.097" endtime="20220616 22:55:15.097"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220616 22:55:15.097" endtime="20220616 22:55:15.102"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.097" endtime="20220616 22:55:15.102"/>
+</kw>
+<kw name="Get And Check Response">
+<arg>customer</arg>
+<arg>age=lt.21state=eq.SD</arg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220616 22:55:15.105" level="INFO">GET Request : url=http://localhost:3000/customer?age=lt.21state=eq.SD 
+ path_url=/customer?age=lt.21state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220616 22:55:15.105" level="INFO">GET Response : url=http://localhost:3000/customer?age=lt.21state=eq.SD 
+ status=404, reason=Not Found 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Thu, 16 Jun 2022 19:55:15 GMT', 'Server': 'postgrest/9.0.0', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"hint":null,"details":null,"code":"42P01","message":"relation \"bootcamp.customer\" does not exist"} 
+ </msg>
+<msg timestamp="20220616 22:55:15.105" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220616 22:55:15.102" endtime="20220616 22:55:15.105"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${response_number}</var>
+<arg>${response}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220616 22:55:15.105" level="INFO">${response_number} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220616 22:55:15.105" endtime="20220616 22:55:15.105"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${response_number}[11:14] != 200</arg>
+<arg>Error Message</arg>
+<arg>${response_number}</arg>
+<arg>${response}</arg>
+<arg>ELSE</arg>
+<arg>BuiltIn.Set Test Message</arg>
+<arg>That's right</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Error message">
+<arg>${response_number}</arg>
+<arg>${response}</arg>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>Error ${response_number}[11:14]. ${response.json()}[message]</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220616 22:55:15.106" level="INFO">Set test message to:
+Error 404. relation "bootcamp.customer" does not exist</msg>
+<status status="PASS" starttime="20220616 22:55:15.106" endtime="20220616 22:55:15.106"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.105" endtime="20220616 22:55:15.106"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.105" endtime="20220616 22:55:15.106"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.102" endtime="20220616 22:55:15.106"/>
+</kw>
+<kw name="Test Teardown" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220616 22:55:15.107" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220616 22:55:15.107" endtime="20220616 22:55:15.107"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220616 22:55:15.107" endtime="20220616 22:55:15.107"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.106" endtime="20220616 22:55:15.107"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.096" endtime="20220616 22:55:15.107">Error 404. relation "bootcamp.customer" does not exist</status>
+</test>
+<test id="s1-s1-t3" name="Check Search One Table #3" line="11">
+<kw name="Test Setup" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220616 22:55:15.108" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220616 22:55:15.108" endtime="20220616 22:55:15.108"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220616 22:55:15.108" endtime="20220616 22:55:15.113"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.108" endtime="20220616 22:55:15.113"/>
+</kw>
+<kw name="Get And Check Response">
+<arg>customers</arg>
+<arg>age=lt.twentyOne&amp;state=eq.SD</arg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220616 22:55:15.116" level="INFO">GET Request : url=http://localhost:3000/customers?age=lt.twentyOne&amp;state=eq.SD 
+ path_url=/customers?age=lt.twentyOne&amp;state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220616 22:55:15.116" level="INFO">GET Response : url=http://localhost:3000/customers?age=lt.twentyOne&amp;state=eq.SD 
+ status=400, reason=Bad Request 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Thu, 16 Jun 2022 19:55:15 GMT', 'Server': 'postgrest/9.0.0', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"hint":null,"details":null,"code":"22P02","message":"invalid input syntax for type smallint: \"twentyOne\""} 
+ </msg>
+<msg timestamp="20220616 22:55:15.116" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220616 22:55:15.113" endtime="20220616 22:55:15.116"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${response_number}</var>
+<arg>${response}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220616 22:55:15.116" level="INFO">${response_number} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220616 22:55:15.116" endtime="20220616 22:55:15.116"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${response_number}[11:14] != 200</arg>
+<arg>Error Message</arg>
+<arg>${response_number}</arg>
+<arg>${response}</arg>
+<arg>ELSE</arg>
+<arg>BuiltIn.Set Test Message</arg>
+<arg>That's right</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Error message">
+<arg>${response_number}</arg>
+<arg>${response}</arg>
+<kw name="Set Test Message" library="BuiltIn">
+<arg>Error ${response_number}[11:14]. ${response.json()}[message]</arg>
+<doc>Sets message for the current test case.</doc>
+<msg timestamp="20220616 22:55:15.118" level="INFO">Set test message to:
+Error 400. invalid input syntax for type smallint: "twentyOne"</msg>
+<status status="PASS" starttime="20220616 22:55:15.117" endtime="20220616 22:55:15.118"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.117" endtime="20220616 22:55:15.118"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.116" endtime="20220616 22:55:15.118"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.113" endtime="20220616 22:55:15.118"/>
+</kw>
+<kw name="Test Teardown" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220616 22:55:15.118" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220616 22:55:15.118" endtime="20220616 22:55:15.118"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220616 22:55:15.118" endtime="20220616 22:55:15.119"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.118" endtime="20220616 22:55:15.119"/>
+</kw>
+<status status="PASS" starttime="20220616 22:55:15.107" endtime="20220616 22:55:15.119">Error 400. invalid input syntax for type smallint: "twentyOne"</status>
+</test>
+<status status="PASS" starttime="20220616 22:55:15.032" endtime="20220616 22:55:15.119"/>
+</suite>
+<status status="PASS" starttime="20220616 22:55:15.011" endtime="20220616 22:55:15.120"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Task Lesson">Task Lesson</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s1" name="Autotesk">Task Lesson.Autotesk</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
