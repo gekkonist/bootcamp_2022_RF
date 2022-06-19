@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220619 22:23:48.363" rpa="false" schemaversion="3">
+<suite id="s1" name="Task 2" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_2/task_2">
+<suite id="s1-s1" name="Task" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_2/task_2/task.robot">
+<test id="s1-s1-t1" name="Checking data changes in one table" line="13">
+<kw name="Test Setup" library="resource" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220619 22:23:48.493" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220619 22:23:48.493" endtime="20220619 22:23:48.493"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220619 22:23:48.493" endtime="20220619 22:23:48.498"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.492" endtime="20220619 22:23:48.498"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>category=17</arg>
+<arg>categoryname=BootcampUser</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220619 22:23:48.499" level="INFO">${data} = {'category': '17', 'categoryname': 'BootcampUser'}</msg>
+<status status="PASS" starttime="20220619 22:23:48.499" endtime="20220619 22:23:48.499"/>
+</kw>
+<kw name="POST new data">
+<arg>${data}</arg>
+<kw name="POST On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/categories?</arg>
+<arg>data=${data}</arg>
+<arg>json=application/json</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220619 22:23:48.524" level="INFO">POST Request : url=http://localhost:3000/categories 
+ path_url=/categories 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '37', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=category=17&amp;categoryname=BootcampUser 
+ </msg>
+<msg timestamp="20220619 22:23:48.524" level="INFO">POST Response : url=http://localhost:3000/categories 
+ status=201, reason=Created 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sun, 19 Jun 2022 19:23:48 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '*/*'} 
+ body=None 
+ </msg>
+<msg timestamp="20220619 22:23:48.525" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220619 22:23:48.499" endtime="20220619 22:23:48.525"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.499" endtime="20220619 22:23:48.525"/>
+</kw>
+<kw name="Get Category ID And Category Name Customers From PostRest">
+<var>${category}</var>
+<var>${categoryname}</var>
+<kw name="GET On Session" library="Req">
+<var>${resp}</var>
+<arg>alias</arg>
+<arg>/categories?</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220619 22:23:48.527" level="INFO">GET Request : url=http://localhost:3000/categories 
+ path_url=/categories 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220619 22:23:48.528" level="INFO">GET Response : url=http://localhost:3000/categories 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sun, 19 Jun 2022 19:23:48 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-16/*', 'Content-Location': '/categories', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"category":1,"categoryname":"Action"}, 
+ {"category":2,"categoryname":"Animation"}, 
+ {"category":3,"categoryname":"Children"}, 
+ {"category":4,"categoryname":"Classics"}, 
+ {"category":5,"categoryname":"Comedy"}, 
+ {"category":6,"categoryname":"Documentary"}, 
+ {"category":7,"categoryname":"Drama"}, 
+ {"category":8,"categoryname":"Family"}, 
+ {"category":9,"categoryname":"Foreign"}, 
+ {"category":10,"categoryname":"Games"}, 
+ {"category":11,"categoryname":"Horror"}, 
+ {"category":12,"categoryname":"Music"}, 
+ {"category":13,"categoryname":"New"}, 
+ {"category":14,"categoryname":"Sci-Fi"}, 
+ {"category":15,"categoryname":"Sports"}, 
+ {"category":16,"categoryname":"Travel"}, 
+ {"category":17,"categoryname":"BootcampUser"}] 
+ </msg>
+<msg timestamp="20220619 22:23:48.528" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220619 22:23:48.525" endtime="20220619 22:23:48.528"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${category}</var>
+<arg>${resp.json()}</arg>
+<arg>$..category</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220619 22:23:48.552" level="INFO">${category} = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<status status="PASS" starttime="20220619 22:23:48.528" endtime="20220619 22:23:48.552"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${categoryname}</var>
+<arg>${resp.json()}</arg>
+<arg>$..categoryname</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220619 22:23:48.564" level="INFO">${categoryname} = ['Action', 'Animation', 'Children', 'Classics', 'Comedy', 'Documentary', 'Drama', 'Family', 'Foreign', 'Games', 'Horror', 'Music', 'New', 'Sci-Fi', 'Sports', 'Travel', 'BootcampUser']</msg>
+<status status="PASS" starttime="20220619 22:23:48.552" endtime="20220619 22:23:48.564"/>
+</kw>
+<msg timestamp="20220619 22:23:48.564" level="INFO">${category} = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<msg timestamp="20220619 22:23:48.564" level="INFO">${categoryname} = ['Action', 'Animation', 'Children', 'Classics', 'Comedy', 'Documentary', 'Drama', 'Family', 'Foreign', 'Games', 'Horror', 'Music', 'New', 'Sci-Fi', 'Sports', 'Travel', 'BootcampUser']</msg>
+<status status="PASS" starttime="20220619 22:23:48.525" endtime="20220619 22:23:48.564"/>
+</kw>
+<kw name="Get Category ID And Category Name Customers From DB">
+<var>${categoryname_db}</var>
+<var>${category_db}</var>
+<arg>${SQL}</arg>
+<kw name="Execute Sql String Mapped" library="DB">
+<var>@{result}</var>
+<arg>${SQL}</arg>
+<doc>SQL query execution where each result row is mapped as a dict with column names as keys.</doc>
+<msg timestamp="20220619 22:23:48.565" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;SELECT * from bootcamp.categories&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220619 22:23:48.566" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;category&amp;#x27;: 1, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Action&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 2, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Animation&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 3, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Children&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 4, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Classics&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 5, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Comedy&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 6, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Documentary&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 7, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Drama&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 8, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Family&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 9, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Foreign&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 10, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Games&amp;#x27;}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220619 22:23:48.566" level="INFO">@{result} = [ {'category': 1, 'categoryname': 'Action'} | {'category': 2, 'categoryname': 'Animation'} | {'category': 3, 'categoryname': 'Children'} | {'category': 4, 'categoryname': 'Classics'} | {'category': 5,...</msg>
+<status status="PASS" starttime="20220619 22:23:48.565" endtime="20220619 22:23:48.566"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${categoryname_db}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220619 22:23:48.566" level="INFO">${categoryname_db} = []</msg>
+<status status="PASS" starttime="20220619 22:23:48.566" endtime="20220619 22:23:48.566"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${category_db}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220619 22:23:48.566" level="INFO">${category_db} = []</msg>
+<status status="PASS" starttime="20220619 22:23:48.566" endtime="20220619 22:23:48.567"/>
+</kw>
+<for flavor="IN">
+<var>${k}</var>
+<value>@{result}</value>
+<iter>
+<var name="${k}">{'category': 1, 'categoryname': 'Action'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.567" level="INFO">${k2} = 1.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.567" endtime="20220619 22:23:48.567"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.567" endtime="20220619 22:23:48.567"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.567" endtime="20220619 22:23:48.567"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.567" endtime="20220619 22:23:48.567"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 2, 'categoryname': 'Animation'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.568" level="INFO">${k2} = 2.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.568" endtime="20220619 22:23:48.568"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.568" endtime="20220619 22:23:48.568"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.568" endtime="20220619 22:23:48.568"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.567" endtime="20220619 22:23:48.568"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 3, 'categoryname': 'Children'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.568" level="INFO">${k2} = 3.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.568" endtime="20220619 22:23:48.568"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.569" endtime="20220619 22:23:48.569"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.569" endtime="20220619 22:23:48.569"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.568" endtime="20220619 22:23:48.569"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 4, 'categoryname': 'Classics'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.569" level="INFO">${k2} = 4.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.569" endtime="20220619 22:23:48.569"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.569" endtime="20220619 22:23:48.570"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.570" endtime="20220619 22:23:48.570"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.569" endtime="20220619 22:23:48.570"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 5, 'categoryname': 'Comedy'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.570" level="INFO">${k2} = 5.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.570" endtime="20220619 22:23:48.570"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.570" endtime="20220619 22:23:48.570"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.570" endtime="20220619 22:23:48.571"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.570" endtime="20220619 22:23:48.571"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 6, 'categoryname': 'Documentary'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.571" level="INFO">${k2} = 6.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.571" endtime="20220619 22:23:48.571"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.571" endtime="20220619 22:23:48.571"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.571" endtime="20220619 22:23:48.571"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.571" endtime="20220619 22:23:48.571"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 7, 'categoryname': 'Drama'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.572" level="INFO">${k2} = 7.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.571" endtime="20220619 22:23:48.572"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.572" endtime="20220619 22:23:48.572"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.572" endtime="20220619 22:23:48.572"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.571" endtime="20220619 22:23:48.572"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 8, 'categoryname': 'Family'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.572" level="INFO">${k2} = 8.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.572" endtime="20220619 22:23:48.572"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.572" endtime="20220619 22:23:48.573"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.573" endtime="20220619 22:23:48.573"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.572" endtime="20220619 22:23:48.573"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 9, 'categoryname': 'Foreign'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.573" level="INFO">${k2} = 9.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.573" endtime="20220619 22:23:48.573"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.574" endtime="20220619 22:23:48.574"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.574" endtime="20220619 22:23:48.574"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.573" endtime="20220619 22:23:48.574"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 10, 'categoryname': 'Games'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.575" level="INFO">${k2} = 10.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.574" endtime="20220619 22:23:48.575"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.575" endtime="20220619 22:23:48.575"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.575" endtime="20220619 22:23:48.575"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.574" endtime="20220619 22:23:48.575"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 11, 'categoryname': 'Horror'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.575" level="INFO">${k2} = 11.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.575" endtime="20220619 22:23:48.575"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.575" endtime="20220619 22:23:48.576"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.576" endtime="20220619 22:23:48.576"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.575" endtime="20220619 22:23:48.576"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 12, 'categoryname': 'Music'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.576" level="INFO">${k2} = 12.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.576" endtime="20220619 22:23:48.576"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.576" endtime="20220619 22:23:48.576"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.576" endtime="20220619 22:23:48.577"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.576" endtime="20220619 22:23:48.577"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 13, 'categoryname': 'New'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.577" level="INFO">${k2} = 13.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.577" endtime="20220619 22:23:48.577"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.577" endtime="20220619 22:23:48.577"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.577" endtime="20220619 22:23:48.577"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.577" endtime="20220619 22:23:48.577"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 14, 'categoryname': 'Sci-Fi'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.578" level="INFO">${k2} = 14.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.578" endtime="20220619 22:23:48.578"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.578" endtime="20220619 22:23:48.578"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.578" endtime="20220619 22:23:48.578"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.577" endtime="20220619 22:23:48.578"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 15, 'categoryname': 'Sports'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.578" level="INFO">${k2} = 15.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.578" endtime="20220619 22:23:48.578"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.579" endtime="20220619 22:23:48.579"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.579" endtime="20220619 22:23:48.579"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.578" endtime="20220619 22:23:48.579"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 16, 'categoryname': 'Travel'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.579" level="INFO">${k2} = 16.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.579" endtime="20220619 22:23:48.579"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.579" endtime="20220619 22:23:48.579"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.579" endtime="20220619 22:23:48.580"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.579" endtime="20220619 22:23:48.580"/>
+</iter>
+<iter>
+<var name="${k}">{'category': 17, 'categoryname': 'BootcampUser'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[category]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220619 22:23:48.580" level="INFO">${k2} = 17.0</msg>
+<status status="PASS" starttime="20220619 22:23:48.580" endtime="20220619 22:23:48.580"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${categoryname_db}</arg>
+<arg>${k}[categoryname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.580" endtime="20220619 22:23:48.580"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${category_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220619 22:23:48.580" endtime="20220619 22:23:48.580"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.580" endtime="20220619 22:23:48.580"/>
+</iter>
+<status status="PASS" starttime="20220619 22:23:48.567" endtime="20220619 22:23:48.580"/>
+</for>
+<msg timestamp="20220619 22:23:48.581" level="INFO">${categoryname_db} = ['Action', 'Animation', 'Children', 'Classics', 'Comedy', 'Documentary', 'Drama', 'Family', 'Foreign', 'Games', 'Horror', 'Music', 'New', 'Sci-Fi', 'Sports', 'Travel', 'BootcampUser']</msg>
+<msg timestamp="20220619 22:23:48.581" level="INFO">${category_db} = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0]</msg>
+<status status="PASS" starttime="20220619 22:23:48.564" endtime="20220619 22:23:48.581"/>
+</kw>
+<kw name="Compare results">
+<arg>${category}</arg>
+<arg>${categoryname}</arg>
+<arg>${category_db}</arg>
+<arg>${categoryname_db}</arg>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${category_id_rest}</arg>
+<arg>${category_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<status status="PASS" starttime="20220619 22:23:48.581" endtime="20220619 22:23:48.581"/>
+</kw>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${categoryname_rest}</arg>
+<arg>${categoryname_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<status status="PASS" starttime="20220619 22:23:48.582" endtime="20220619 22:23:48.582"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.581" endtime="20220619 22:23:48.582"/>
+</kw>
+<kw name="Test Teardown" library="resource" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220619 22:23:48.582" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220619 22:23:48.582" endtime="20220619 22:23:48.582"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220619 22:23:48.582" endtime="20220619 22:23:48.582"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.582" endtime="20220619 22:23:48.583"/>
+</kw>
+<status status="PASS" starttime="20220619 22:23:48.492" endtime="20220619 22:23:48.583"/>
+</test>
+<status status="PASS" starttime="20220619 22:23:48.376" endtime="20220619 22:23:48.583"/>
+</suite>
+<status status="PASS" starttime="20220619 22:23:48.364" endtime="20220619 22:23:48.584"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Task 2">Task 2</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Task">Task 2.Task</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
