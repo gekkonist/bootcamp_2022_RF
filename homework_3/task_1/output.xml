@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220620 01:40:35.053" rpa="false" schemaversion="3">
+<suite id="s1" name="Task 1" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_3/task_1">
+<suite id="s1-s1" name="Task" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_3/task_1/task.robot">
+<test id="s1-s1-t1" name="Checking the search for data from multiple tables" line="15">
+<kw name="Test Setup" library="resource" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220620 01:40:35.111" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220620 01:40:35.111" endtime="20220620 01:40:35.111"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220620 01:40:35.112" endtime="20220620 01:40:35.117"/>
+</kw>
+<status status="PASS" starttime="20220620 01:40:35.111" endtime="20220620 01:40:35.117"/>
+</kw>
+<kw name="Take An Error Postrest Request" library="EPS">
+<var>${response}</var>
+<arg>table=cust_hist</arg>
+<arg>params=select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40</arg>
+<msg timestamp="20220620 01:40:35.178" level="INFO">GET Request : url=http://localhost:3000/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
+ path_url=/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220620 01:40:35.178" level="INFO">GET Response : url=http://localhost:3000/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sun, 19 Jun 2022 22:40:35 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-7469/*', 'Content-Location': '/cust_hist?customers.age=gt.20,lt.40&amp;products.price=gt.20&amp;select=customers%21inner%28firstname%2Clastname%2Cage%2Cgender%29%2Cproducts%21inner%28title%2Ccategory%2Cprice%29', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"products":{"title":"AFRICAN WALLS","category":4,"price":29.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"ALADDIN STONE","category":16,"price":23.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"AIRPLANE STEPMOM","category":8,"price":25.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT KILLER","category":9,"price":29.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"ADAPTATION VIETNAM","category":3,"price":21.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"AGENT STEPMOM","category":13,"price":24.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"ACE LION","category":6,"price":27.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"ACE DRIVING","category":1,"price":26.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT AIRPLANE","category":13,"price":27.99},"customers":{"firstname":"PIQHFH","lastname":"HARCEUESIQ","age":33,"gender":"F"}}, 
+ {"products":{"title":"ADAPTATION MULHOLLAND","category":15,"price":20.99},"customers":{"firstname":"WSGVOP","lastname":"FRQTPCUFCF","age":33,"gender":"M"}}, 
+ {"products":{"title":"AGENT SCALAWAG","category":8,"price":29.99},"customers":{"firstname":"WSGVOP","lastname":"FRQTPCUFCF","age":33,"gender":"M"}}, 
+ {"products":{"title":"AIRPLANE PAYCHECK","category":5,"price":20.99},"customers":{"firstname":"WSGVOP","lastname":"FRQTPCUFCF","age":33,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT OZ","category":6,"price":28.99},"customers":{"firstname":"IUKTYY","lastname":"MOICFLYHZW","age":30,"gender":"F"}}, 
+ {"products":{"title":"ACE DARN","category":9,"price":23.99},"customers":{"firstname":"IUKTYY","lastname":"MOICFLYHZW","age":30,"gender":"F"}}, 
+ {"products":{"title":"ALABAMA NEMO","category":11,"price":23.99},"customers":{"firstname":"IUKTYY","lastname":"MOICFLYHZW","age":30,"gender":"F"}}, 
+ {"products":{"title":"AIRPORT VARSITY","category":15,"price":23.99},"customers":{"firstname":"IUKTYY","lastname":"MOICFLYHZW","age":30,"gender":"F"}}, 
+ {"products":{"title":"ALADDIN BRIDE","category":13,"price":25.99},"customers":{"firstname":"IUKTYY","lastname":"MOICFLYHZW","age":30,"gender":"F"}}, 
+ {"products":{"title":"AFRICAN WOMEN","category":16,"price":29.99},"customers":{"firstname":"IUKTYY","lastname":"MOICFLYHZW","age":30,"gender":"F"}}, 
+ {"products":{"title":"ALABAMA AMADEUS","category":12,"price":20.99},"customers":{"firstname":"UWQOBC","lastname":"UCKZVPDQNV","age":22,"gender":"F"}}, 
+ {"products":{"title":"ACE LONELY","category":8,"price":25.99},"customers":{"firstname":"UWQOBC","lastname":"UCKZVPDQNV","age":22,"gender":"F"}}, 
+ {"products":{"title":"ACADEMY OLEANDER","category":14,"price":26.99},"customers":{"firstname":"UWQOBC","lastname":"UCKZVPDQNV","age":22,"gender":"F"}}, 
+ {"products":{"title":"ALABAMA EVERYONE","category":3,"price":25.99},"customers":{"firstname":"OZKCAM","lastname":"KEJXNLPOVH","age":29,"gender":"F"}}, 
+ {"products":{"title":"ALADDIN ARTIST","category":11,"price":23.99},"customers":{"firstname":"OZKCAM","lastname":"KEJXNLPOVH","age":29,"gender":"F"}}, 
+ {"products":{"title":"AFFAIR VIRTUAL","category":1,"price":26.99},"customers":{"firstname":"OZKCAM","lastname":"KEJXNLPOVH","age":29,"gender":"F"}}, 
+ {"products":{"title":"AIRPORT ALADDIN","category":5,"price":29.99},"customers":{"firstname":"KFWBIM","lastname":"VGTJDYRBRJ","age":22,"gender":"F"}}, 
+ {"products":{"title":"ACE CAT","category":1,"price":24.99},"customers":{"firstname":"KFWBIM","lastname":"VGTJDYRBRJ","age":22,"gender":"F"}}, 
+ {"products":{"title":"AIRPLANE GREASE","category":8,"price":29.99},"customers":{"firstname":"KVRDSS","lastname":"GFZWHZNCJQ","age":22,"gender":"F"}}, 
+ {"products":{"title":"ACE HUNGER","category":6,"price":22.99},"customers":{"firstname":"KVRDSS","lastname":"GFZWHZNCJQ","age":22,"gender":"F"}}, 
+ {"products":{"title":"AFRICAN POSEIDON","category":12,"price":20.99},"customers":{"firstname":"VBSCIN","lastname":"KHPXBSGWOH","age":23,"gender":"F"}}, 
+ {"products":{"title":"ALABAMA CLERKS","category":15,"price":23.99},"customers":{"firstname":"VBSCIN","lastname":"KHPXBSGWOH","age":23,"gender":"F"}}, 
+ {"products":{"title":"AIRPORT EXPECATIONS","category":1,"price":29.99},"customers":{"firstname":"VBSCIN","lastname":"KHPXBSGWOH","age":23,"gender":"F"}}, 
+ {"products":{"title":"ADAPTATION ORDER","category":14,"price":24.99},"customers":{"firstname":"VBSCIN","lastname":"KHPXBSGWOH","age":23,"gender":"F"}}, 
+ {"products":{"title":"AFFAIR DAWN","category":4,"price":27.99},"customers":{"firstname":"AWBBRM","lastname":"VFJANNDSBO","age":30,"gender":"F"}}, 
+ {"products":{"title":"AGENT EARRING","category":12,"price":25.99},"customers":{"firstname":"AWBBRM","lastname":"VFJANNDSBO","age":30,"gender":"F"}}, 
+ {"products":{"title":"ADAPTATION KRAMER","category":9,"price":20.99},"customers":{"firstname":"AWBBRM","lastname":"VFJANNDSBO","age":30,"gender":"F"}}, 
+ {"products":{"title":"ACADEMY RIVER","category":15,"price":24.99},"customers":{"firstname":"AWBBRM","lastname":"VFJANNDSBO","age":30,"gender":"F"}}, 
+ {"products":{"title":"ALADDIN BUCKET","category":7,"price":25.99},"customers":{"firstname":"NHZYTH","lastname":"JJXPWNYAOL","age":33,"gender":"M"}}, 
+ {"products":{"title":"ACADEMY NORTH","category":14,"price":27.99},"customers":{"firstname":"NHZYTH","lastname":"JJXPWNYAOL","age":33,"gender":"M"}}, 
+ {"products":{"title":"AGENT EASY","category":3,"price":20.99},"customers":{"firstname":"NHZYTH","lastname":"JJXPWNYAOL","age":33,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT KENTUCKIAN","category":7,"price":20.99},"customers":{"firstname":"EFFOYI","lastname":"SXLCUNINCJ","age":21,"gender":"M"}}, 
+ {"products":{"title":"ALABAMA MODERN","category":14,"price":27.99},"customers":{"firstname":"EFFOYI","lastname":"SXLCUNINCJ","age":21,"gender":"M"}}, 
+ {"products":{"title":"ADAPTATION VALLEY","category":11,"price":27.99},"customers":{"firstname":"EFFOYI","lastname":"SXLCUNINCJ","age":21,"gender":"M"}}, 
+ {"products":{"title":"ACADEMY CHAINSAW","category":12,"price":29.99},"customers":{"firstname":"UNXRGR","lastname":"NQOOTZALHD","age":24,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT ILLUSION","category":14,"price":29.99},"customers":{"firstname":"UNXRGR","lastname":"NQOOTZALHD","age":24,"gender":"M"}}, 
+ {"products":{"title":"AGENT CLERKS","category":1,"price":24.99},"customers":{"firstname":"YKUEVP","lastname":"SBIBPLMSBE","age":28,"gender":"M"}}, 
+ {"products":{"title":"ALABAMA ORDER","category":1,"price":26.99},"customers":{"firstname":"YKUEVP","lastname":"SBIBPLMSBE","age":28,"gender":"M"}}, 
+ {"products":{"title":"ALADDIN LANGUAGE","category":5,"price":21.99},"customers":{"firstname":"YKUEVP","lastname":"SBIBPLMSBE","age":28,"gender":"M"}}, 
+ {"products":{"title":"AGENT SATURN","category":11,"price":21.99},"customers":{"firstname":"YKUEVP","lastname":"SBIBPLMSBE","age":28,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT SWEET","category":7,"price":24.99},"customers":{"firstname":"YKUEVP","lastname":"SBIBPLMSBE","age":28,"gender":"M"}}, 
+ {"products":{"title":"ALABAMA MAGIC","category":10,"price":22.99},"customers":{"firstname":"UDMOEK","lastname":"XUYCSAQBZY","age":27,"gender":"F"}}, 
+ {"products":{"title":"ALADDIN FOREVER","category":5,"price":29.99},"customers":{"firstname":"UDMOEK","lastname":"XUYCSAQBZY","age":27,"gender":"F"}}, 
+ {"products":{"title":"AGENT MICROCOSMOS","category":15,"price":23.99},"customers":{"firstname":"UDMOEK","lastname":"XUYCSAQBZY","age":27,"gender":"F"}}, 
+ {"products":{"title":"ADAPTATION PERFECT","category":3,"price":26.99},"customers":{"firstname":"PBVHWF","lastname":"VOUPUYPDQV","age":32,"gender":"F"}}, 
+ {"products":{"title":"AIRPLANE OCTOBER","category":2,"price":27.99},"customers":{"firstname":"PBVHWF","lastname":"VOUPUYPDQV","age":32,"gender":"F"}}, 
+ {"products":{"title":"AFFAIR ELEPHANT","category":15,"price":28.99},"customers":{"firstname":"PBVHWF","lastname":"VOUPUYPDQV","age":32,"gender":"F"}}, 
+ {"products":{"title":"ADAPTATION INTERVIEW","category":9,"price":27.99},"customers":{"firstname":"PBVHWF","lastname":"VOUPUYPDQV","age":32,"gender":"F"}}, 
+ {"products":{"title":"ACE HYDE","category":11,"price":23.99},"customers":{"firstname":"CERVQZ","lastname":"VOJWLIMZRN","age":36,"gender":"F"}}, 
+ {"products":{"title":"AGENT WRONG","category":5,"price":27.99},"customers":{"firstname":"CERVQZ","lastname":"VOJWLIMZRN","age":36,"gender":"F"}}, 
+ {"products":{"title":"AIRPORT FELLOWSHIP","category":2,"price":23.99},"customers":{"firstname":"CERVQZ","lastname":"VOJWLIMZRN","age":36,"gender":"F"}}, 
+ {"products":{"title":"AIRPLANE PITY","category":15,"price":22.99},"customers":{"firstname":"HEDABG","lastname":"QOZTTZKUMD","age":33,"gender":"F"}}, 
+ {"products":{"title":"AFFAIR MALKOVICH","category":16,"price":28.99},"customers":{"firstname":"HEDABG","lastname":"QOZTTZKUMD","age":33,"gender":"F"}}, 
+ {"products":{"title":"AFFAIR RUN","category":13,"price":23.99},"customers":{"firstname":"HEDABG","lastname":"QOZTTZKUMD","age":33,"gender":"F"}}, 
+ {"products":{"title":"AIRPORT ARGONAUTS","category":14,"price":21.99},"customers":{"firstname":"HEDABG","lastname":"QOZTTZKUMD","age":33,"gender":"F"}}, 
+ {"products":{"title":"ACE POTLUCK","category":10,"price":24.99},"customers":{"firstname":"AQOFZQ","lastname":"SMQPAGOTZY","age":23,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT GORGEOUS","category":12,"price":29.99},"customers":{"firstname":"QVKDLD","lastname":"XCZDAAEZHD","age":29,"gender":"M"}}, 
+ {"products":{"title":"AIRPORT ROXANNE","category":8,"price":20.99},"customers":{"firstname":"WNYTYS","lastname":"BCZDQDVUFO","age":29,"gender":"M"}}... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220620 01:40:35.178" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20220620 01:40:35.117" endtime="20220620 01:40:35.178"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${response}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220620 01:40:35.178" endtime="20220620 01:40:35.179"/>
+</kw>
+<kw name="Test Teardown" library="resource" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220620 01:40:35.179" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220620 01:40:35.179" endtime="20220620 01:40:35.179"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220620 01:40:35.179" endtime="20220620 01:40:35.180"/>
+</kw>
+<status status="PASS" starttime="20220620 01:40:35.179" endtime="20220620 01:40:35.180"/>
+</kw>
+<tag>defaults</tag>
+<timeout value="1 second"/>
+<status status="PASS" starttime="20220620 01:40:35.110" endtime="20220620 01:40:35.180"/>
+</test>
+<doc>Тест на проверку поиска данных из нескольких таблиц</doc>
+<meta name="Автор">Костин Георгий</meta>
+<meta name="Задача">Поток "Тестирование"/Третье домашнее задание RF</meta>
+<status status="PASS" starttime="20220620 01:40:35.067" endtime="20220620 01:40:35.180"/>
+</suite>
+<status status="PASS" starttime="20220620 01:40:35.054" endtime="20220620 01:40:35.181"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">defaults</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Task 1">Task 1</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Task">Task 1.Task</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
