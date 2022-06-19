@@ -2,8 +2,10 @@
 Resource            resource.robot
 Default Tags        defaults
 Documentation       Тест на проверку поиска данных из нескольких таблиц
-Metadata            Автор       Костин Георгий
-Metadata            Задача      Поток "Тестирование"/Третье домашнее задание RF
+Metadata            Автор                   Костин Георгий
+Metadata            Поток                   Тестирование
+Metadata            Домашнее задание        RF/3
+Metadata            Задача                  1
 
 Test Timeout        1s
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220620 01:40:35.053" rpa="false" schemaversion="3">
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220620 01:44:02.277" rpa="false" schemaversion="3">
 <suite id="s1" name="Task 1" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_3/task_1">
 <suite id="s1-s1" name="Task" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_3/task_1/task.robot">
-<test id="s1-s1-t1" name="Checking the search for data from multiple tables" line="15">
+<test id="s1-s1-t1" name="Checking the search for data from multiple tables" line="17">
 <kw name="Test Setup" library="resource" type="SETUP">
 <kw name="Create Session" library="Req">
 <arg>alias</arg>
 <arg>http://localhost:3000</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20220620 01:40:35.111" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20220620 01:40:35.111" endtime="20220620 01:40:35.111"/>
+<msg timestamp="20220620 01:44:02.350" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220620 01:44:02.350" endtime="20220620 01:44:02.350"/>
 </kw>
 <kw name="Connect To Postgresql" library="DB">
 <arg>app_db</arg>
@@ -18,22 +18,22 @@
 <arg>localhost</arg>
 <arg>5432</arg>
 <doc>Connection to Postgres DB.</doc>
-<status status="PASS" starttime="20220620 01:40:35.112" endtime="20220620 01:40:35.117"/>
+<status status="PASS" starttime="20220620 01:44:02.350" endtime="20220620 01:44:02.356"/>
 </kw>
-<status status="PASS" starttime="20220620 01:40:35.111" endtime="20220620 01:40:35.117"/>
+<status status="PASS" starttime="20220620 01:44:02.349" endtime="20220620 01:44:02.356"/>
 </kw>
 <kw name="Take An Error Postrest Request" library="EPS">
 <var>${response}</var>
 <arg>table=cust_hist</arg>
 <arg>params=select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40</arg>
-<msg timestamp="20220620 01:40:35.178" level="INFO">GET Request : url=http://localhost:3000/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
+<msg timestamp="20220620 01:44:02.422" level="INFO">GET Request : url=http://localhost:3000/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
  path_url=/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
  headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg timestamp="20220620 01:40:35.178" level="INFO">GET Response : url=http://localhost:3000/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
+<msg timestamp="20220620 01:44:02.423" level="INFO">GET Response : url=http://localhost:3000/cust_hist?select=customers!inner(firstname,lastname,age,gender),products!inner(title,category,price)&amp;products.price=gt.20&amp;customers.age=gt.20&amp;customers.age=lt.40 
  status=200, reason=OK 
- headers={'Transfer-Encoding': 'chunked', 'Date': 'Sun, 19 Jun 2022 22:40:35 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-7469/*', 'Content-Location': '/cust_hist?customers.age=gt.20,lt.40&amp;products.price=gt.20&amp;select=customers%21inner%28firstname%2Clastname%2Cage%2Cgender%29%2Cproducts%21inner%28title%2Ccategory%2Cprice%29', 'Content-Type': 'application/json; charset=utf-8'} 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sun, 19 Jun 2022 22:44:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-7469/*', 'Content-Location': '/cust_hist?customers.age=gt.20,lt.40&amp;products.price=gt.20&amp;select=customers%21inner%28firstname%2Clastname%2Cage%2Cgender%29%2Cproducts%21inner%28title%2Ccategory%2Cprice%29', 'Content-Type': 'application/json; charset=utf-8'} 
  body=[{"products":{"title":"AFRICAN WALLS","category":4,"price":29.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
  {"products":{"title":"ALADDIN STONE","category":16,"price":23.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
  {"products":{"title":"AIRPLANE STEPMOM","category":8,"price":25.99},"customers":{"firstname":"EOECCN","lastname":"LTUNSZJFYL","age":22,"gender":"M"}}, 
@@ -101,40 +101,42 @@
  {"products":{"title":"AIRPORT GORGEOUS","category":12,"price":29.99},"customers":{"firstname":"QVKDLD","lastname":"XCZDAAEZHD","age":29,"gender":"M"}}, 
  {"products":{"title":"AIRPORT ROXANNE","category":8,"price":20.99},"customers":{"firstname":"WNYTYS","lastname":"BCZDQDVUFO","age":29,"gender":"M"}}... (set the log level to DEBUG or TRACE to see the full content) 
  </msg>
-<msg timestamp="20220620 01:40:35.178" level="INFO">${response} = 200</msg>
-<status status="PASS" starttime="20220620 01:40:35.117" endtime="20220620 01:40:35.178"/>
+<msg timestamp="20220620 01:44:02.423" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20220620 01:44:02.356" endtime="20220620 01:44:02.423"/>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <arg>${response}</arg>
 <arg>200</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" starttime="20220620 01:40:35.178" endtime="20220620 01:40:35.179"/>
+<status status="PASS" starttime="20220620 01:44:02.423" endtime="20220620 01:44:02.424"/>
 </kw>
 <kw name="Test Teardown" library="resource" type="TEARDOWN">
 <kw name="Delete All Sessions" library="Req">
 <doc>Removes all the session objects</doc>
-<msg timestamp="20220620 01:40:35.179" level="INFO">Deleting All Sessions</msg>
-<status status="PASS" starttime="20220620 01:40:35.179" endtime="20220620 01:40:35.179"/>
+<msg timestamp="20220620 01:44:02.425" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220620 01:44:02.425" endtime="20220620 01:44:02.425"/>
 </kw>
 <kw name="Disconnect From Postgresql" library="DB">
 <doc>Close active PostgreSQL connection.
 You will have to manually open or switch to a new connection.
 Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
 closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
-<status status="PASS" starttime="20220620 01:40:35.179" endtime="20220620 01:40:35.180"/>
+<status status="PASS" starttime="20220620 01:44:02.425" endtime="20220620 01:44:02.425"/>
 </kw>
-<status status="PASS" starttime="20220620 01:40:35.179" endtime="20220620 01:40:35.180"/>
+<status status="PASS" starttime="20220620 01:44:02.424" endtime="20220620 01:44:02.425"/>
 </kw>
 <tag>defaults</tag>
 <timeout value="1 second"/>
-<status status="PASS" starttime="20220620 01:40:35.110" endtime="20220620 01:40:35.180"/>
+<status status="PASS" starttime="20220620 01:44:02.349" endtime="20220620 01:44:02.425"/>
 </test>
 <doc>Тест на проверку поиска данных из нескольких таблиц</doc>
 <meta name="Автор">Костин Георгий</meta>
-<meta name="Задача">Поток "Тестирование"/Третье домашнее задание RF</meta>
-<status status="PASS" starttime="20220620 01:40:35.067" endtime="20220620 01:40:35.180"/>
+<meta name="Домашнее задание">RF/3</meta>
+<meta name="Задача">1</meta>
+<meta name="Поток">Тестирование</meta>
+<status status="PASS" starttime="20220620 01:44:02.301" endtime="20220620 01:44:02.426"/>
 </suite>
-<status status="PASS" starttime="20220620 01:40:35.054" endtime="20220620 01:40:35.181"/>
+<status status="PASS" starttime="20220620 01:44:02.279" endtime="20220620 01:44:02.427"/>
 </suite>
 <statistics>
 <total>
