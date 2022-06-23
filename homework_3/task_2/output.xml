@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220623 12:04:03.829" rpa="false" schemaversion="3">
+<suite id="s1" name="Task 2" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_3/task_2">
+<suite id="s1-s1" name="Task" source="/home/gekkonist/Рабочий стол/nexign/RF/homework_3/task_2/task.robot">
+<test id="s1-s1-t1" name="Checking data changes in one table" line="21">
+<kw name="Test Setup" library="resource" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220623 12:04:03.964" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220623 12:04:03.964" endtime="20220623 12:04:03.965"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220623 12:04:03.965" endtime="20220623 12:04:03.970"/>
+</kw>
+<status status="PASS" starttime="20220623 12:04:03.964" endtime="20220623 12:04:03.970"/>
+</kw>
+<kw name="Post New Data" library="CCDB">
+<arg>data=&amp;{data}</arg>
+<msg timestamp="20220623 12:04:03.981" level="INFO">POST Request : url=http://localhost:3000/categories 
+ path_url=/categories 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '37', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=category=17&amp;categoryname=BootcampUser 
+ </msg>
+<msg timestamp="20220623 12:04:03.981" level="INFO">POST Response : url=http://localhost:3000/categories 
+ status=201, reason=Created 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Thu, 23 Jun 2022 09:04:03 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '*/*'} 
+ body=None 
+ </msg>
+<status status="PASS" starttime="20220623 12:04:03.970" endtime="20220623 12:04:03.981"/>
+</kw>
+<kw name="Get Category Id And Category Name Customers From Postrest" library="CCDB">
+<var>${category}</var>
+<var>${categoryname}</var>
+<msg timestamp="20220623 12:04:03.984" level="INFO">GET Request : url=http://localhost:3000/categories 
+ path_url=/categories 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220623 12:04:03.984" level="INFO">GET Response : url=http://localhost:3000/categories 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Thu, 23 Jun 2022 09:04:03 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-16/*', 'Content-Location': '/categories', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"category":1,"categoryname":"Action"}, 
+ {"category":2,"categoryname":"Animation"}, 
+ {"category":3,"categoryname":"Children"}, 
+ {"category":4,"categoryname":"Classics"}, 
+ {"category":5,"categoryname":"Comedy"}, 
+ {"category":6,"categoryname":"Documentary"}, 
+ {"category":7,"categoryname":"Drama"}, 
+ {"category":8,"categoryname":"Family"}, 
+ {"category":9,"categoryname":"Foreign"}, 
+ {"category":10,"categoryname":"Games"}, 
+ {"category":11,"categoryname":"Horror"}, 
+ {"category":12,"categoryname":"Music"}, 
+ {"category":13,"categoryname":"New"}, 
+ {"category":14,"categoryname":"Sci-Fi"}, 
+ {"category":15,"categoryname":"Sports"}, 
+ {"category":16,"categoryname":"Travel"}, 
+ {"category":17,"categoryname":"BootcampUser"}] 
+ </msg>
+<msg timestamp="20220623 12:04:04.020" level="INFO">${category} = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<msg timestamp="20220623 12:04:04.020" level="INFO">${categoryname} = ['Action', 'Animation', 'Children', 'Classics', 'Comedy', 'Documentary', 'Drama', 'Family', 'Foreign', 'Games', 'Horror', 'Music', 'New', 'Sci-Fi', 'Sports', 'Travel', 'BootcampUser']</msg>
+<status status="PASS" starttime="20220623 12:04:03.981" endtime="20220623 12:04:04.020"/>
+</kw>
+<kw name="Get Category Id And Category Name Customers From Db" library="CCDB">
+<var>${categoryname_db}</var>
+<var>${category_db}</var>
+<msg timestamp="20220623 12:04:04.021" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;SELECT * from bootcamp.categories&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220623 12:04:04.022" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;category&amp;#x27;: 1, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Action&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 2, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Animation&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 3, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Children&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 4, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Classics&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 5, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Comedy&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 6, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Documentary&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 7, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Drama&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 8, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Family&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 9, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Foreign&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 10, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Games&amp;#x27;}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220623 12:04:04.022" level="INFO">${categoryname_db} = ['Action', 'Animation', 'Children', 'Classics', 'Comedy', 'Documentary', 'Drama', 'Family', 'Foreign', 'Games', 'Horror', 'Music', 'New', 'Sci-Fi', 'Sports', 'Travel', 'BootcampUser']</msg>
+<msg timestamp="20220623 12:04:04.022" level="INFO">${category_db} = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<status status="PASS" starttime="20220623 12:04:04.021" endtime="20220623 12:04:04.022"/>
+</kw>
+<kw name="Compare Results" library="CCDB">
+<arg>category=${category}</arg>
+<arg>categoryname=${categoryname}</arg>
+<arg>category_db=${category_db}</arg>
+<arg>categoryname_db=${categoryname_db}</arg>
+<status status="PASS" starttime="20220623 12:04:04.022" endtime="20220623 12:04:04.023"/>
+</kw>
+<kw name="Test Teardown" library="resource" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220623 12:04:04.024" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220623 12:04:04.023" endtime="20220623 12:04:04.024"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220623 12:04:04.024" endtime="20220623 12:04:04.024"/>
+</kw>
+<status status="PASS" starttime="20220623 12:04:04.023" endtime="20220623 12:04:04.024"/>
+</kw>
+<tag>defaults</tag>
+<timeout value="1 second"/>
+<status status="PASS" starttime="20220623 12:04:03.963" endtime="20220623 12:04:04.024"/>
+</test>
+<doc>Tест на проверку изменения данных в одной таблице</doc>
+<meta name="Автор">Костин Георгий</meta>
+<meta name="Домашнее задание">RF/3</meta>
+<meta name="Задача">2</meta>
+<meta name="Поток">Тестирование</meta>
+<status status="PASS" starttime="20220623 12:04:03.842" endtime="20220623 12:04:04.025"/>
+</suite>
+<status status="PASS" starttime="20220623 12:04:03.829" endtime="20220623 12:04:04.026"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">defaults</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Task 2">Task 2</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Task">Task 2.Task</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
